@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UiTM Cycling Club — Jersey Sponsorship Proposal</title>
+<meta name="description" content="Interactive jersey sponsorship proposal for UiTM Cycling Club (UCC). Select a logo slot on the jersey to see its price and enquire directly.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@1,800&family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* =========================================================================
+   STYLES — palette follows the UCC jersey concept:
+   purple / dark purple / black / grey / white. Change tokens in :root.
+   ========================================================================= */
+:root{
+  --ink:#16121f; --ink-2:#3f3a4c; --muted:#62606c;
+  --bg:#efeff2; --surface:#ffffff; --line:#dddce3; --line-strong:#c6c4cf;
+  --purple:#5f1fb5; --purple-dark:#3a1466; --purple-ink:#2a0f4d; --black:#120c1c; --grey:#5d5d62;
+  --lilac:#c9b2f2; --lilac-soft:#eee7fb;
+  --wa:#13804a; --wa-hover:#0e6a3d;
+  --focus:#f2b705;
+  --font-display:"Barlow Condensed","Arial Narrow","Helvetica Neue",Arial,sans-serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --radius:4px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;min-width:280px;font-family:var(--font-body);font-size:16px;line-height:1.55;color:var(--ink);background:var(--bg)}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3,h4{margin:0;font-family:var(--font-display);font-weight:600;text-transform:uppercase;letter-spacing:.01em;line-height:1}
+p{margin:0}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+.wrap{width:100%;max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+.eyebrow{font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--purple)}
+.visually-hidden{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.55em;min-height:48px;padding:0 22px;border:1.5px solid transparent;border-radius:2px;
+  font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;cursor:pointer;
+  transition:background-color .2s var(--ease),border-color .2s var(--ease),color .2s var(--ease);touch-action:manipulation}
+.btn svg{width:18px;height:18px;flex:none}
+.btn--light{background:#fff;color:var(--black)} .btn--light:hover{background:var(--lilac)}
+.btn--ghost-light{border-color:rgba(255,255,255,.4);color:#fff;background:transparent} .btn--ghost-light:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.btn--wa{background:var(--wa);color:#fff} .btn--wa:hover{background:var(--wa-hover)}
+.btn--outline{background:#fff;border-color:var(--line-strong);color:var(--ink)} .btn--outline:hover{border-color:var(--purple);color:var(--purple)}
+.btn--text{min-height:44px;padding:0 4px;background:none;color:var(--purple);border:0;text-decoration:underline;text-underline-offset:3px;letter-spacing:.06em}
+.btn--text:hover{color:var(--purple-dark)}
+.btn--block{width:100%}
+.btn--sm{min-height:40px;padding:0 14px;font-size:14px}
+
+/* Top bar (sticky inside the embed) */
+.topbar{position:sticky;top:0;z-index:30;background:rgba(18,12,28,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);color:#fff;border-bottom:1px solid rgba(255,255,255,.08)}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;min-width:0}
+.brand-mark{font-family:"Barlow",var(--font-display);font-style:italic;font-weight:800;font-size:22px;letter-spacing:.02em;line-height:1}
+.brand-name{display:block;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.65);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.topbar-nav{display:flex;align-items:center;gap:6px}
+.topbar-nav a.link{display:none;padding:10px 12px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:rgba(255,255,255,.75)}
+.topbar-nav a.link:hover{color:#fff}
+@media (min-width:760px){.topbar-nav a.link{display:inline-block}}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;color:#fff;background:
+  radial-gradient(800px 480px at 80% 30%,rgba(95,31,181,.45),transparent 65%),
+  linear-gradient(160deg,#1d1030 0%,var(--black) 70%)}
+.hero .wrap{display:grid;gap:32px;align-items:center;padding-top:clamp(44px,7vw,88px);padding-bottom:clamp(44px,7vw,88px)}
+@media (min-width:860px){.hero .wrap{grid-template-columns:1fr 1fr}}
+.hero .eyebrow{color:var(--lilac)}
+.hero .tagline{margin-top:10px;font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:rgba(255,255,255,.5)}
+.hero h1{margin-top:18px;font-size:clamp(50px,8vw,96px);line-height:.9;font-weight:600}
+.hero h1 span{display:block;color:var(--lilac)}
+.hero-intro{margin-top:22px;max-width:34em;font-size:clamp(16px,1.6vw,18px);color:rgba(255,255,255,.78)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.hero-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:40px 0 0;border-top:1px solid rgba(255,255,255,.15)}
+.hero-facts div{padding:16px 12px 0 0}
+.hero-facts dt{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.hero-facts dd{margin:4px 0 0;font-family:var(--font-display);font-size:clamp(20px,2.6vw,30px);font-weight:600;white-space:nowrap}
+.hero-visual{max-width:600px;width:100%;margin:0 auto}
+
+/* Sections */
+.section{padding:clamp(56px,8vw,100px) 0}
+.section--white{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.section-head{max-width:720px;margin-bottom:clamp(28px,4vw,44px)}
+.section-head h2{margin-top:12px;font-size:clamp(34px,5vw,54px)}
+.section-head p{margin-top:14px;color:var(--muted);font-size:17px}
+
+/* Explorer */
+.explorer{display:grid;gap:24px;grid-template-columns:minmax(0,1fr)}
+@media (min-width:920px){.explorer{grid-template-columns:minmax(0,1fr) 390px;align-items:start}}
+.stage-card{background:linear-gradient(180deg,#f7f7f9 0%,#e3e2e8 100%);border:1px solid var(--line);border-radius:var(--radius);padding:14px clamp(12px,3vw,28px) 18px}
+.view-tabs{position:relative;display:flex;gap:4px;overflow-x:auto;padding:4px;background:#fff;border:1px solid var(--line);border-radius:3px;scrollbar-width:none}
+.view-tabs::-webkit-scrollbar{display:none}
+.view-tab{flex:1 0 auto;min-height:44px;padding:0 14px;border:0;border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;
+  font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;transition:background-color .2s var(--ease),color .2s var(--ease);touch-action:manipulation}
+.view-tab:hover{color:var(--purple);background:var(--lilac-soft)}
+.view-tab[aria-selected="true"]{background:var(--black);color:#fff}
+.view-tab .count{display:inline-grid;place-items:center;min-width:20px;height:20px;margin-left:6px;padding:0 5px;border-radius:10px;font-size:12px;letter-spacing:0;background:var(--lilac-soft);color:var(--purple-dark)}
+.view-tab[aria-selected="true"] .count{background:var(--purple);color:#fff}
+.stage{position:relative;width:100%;max-width:480px;margin:10px auto 0;aspect-ratio:5/6}
+.stage svg{width:100%;height:100%;overflow:visible}
+.stage-note{margin-top:4px;text-align:center;font-size:13px;color:var(--muted)}
+.stage-caption{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:62px;margin-top:12px;padding:10px 14px;background:#fff;border:1px solid var(--line);border-radius:3px}
+.stage-caption .cap-text{font-size:14px;color:var(--ink-2);min-width:0}
+.stage-caption strong{display:block;font-family:var(--font-display);font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);line-height:1.15}
+.stage-caption .cap-price{font-weight:600;color:var(--purple)}
+.stage-caption .btn{flex:none}
+@media (min-width:920px){.stage-caption .btn--wa{display:none}}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin-top:12px;font-size:13px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .swatch{width:22px;height:14px;border-radius:2px;border:1.5px dashed var(--purple-dark);background:rgba(95,31,181,.1)}
+.legend .swatch--link{border-style:dotted;border-color:var(--grey);background:transparent}
+.legend .swatch--reserved{border-style:solid;border-color:#b07a10;background:repeating-linear-gradient(45deg,rgba(212,150,40,.4) 0 3px,transparent 3px 7px)}
+.legend .swatch--sponsored{border-style:solid;border-color:#5b5568;background:repeating-linear-gradient(45deg,rgba(60,55,75,.5) 0 3px,transparent 3px 7px)}
+
+/* Jersey hotspots (inside the SVG) */
+.zone{cursor:pointer;outline:none;-webkit-tap-highlight-color:transparent;transition:opacity .2s var(--ease);filter:drop-shadow(0 0 1.5px rgba(0,0,0,.75))}
+.zone-shape{fill:rgba(255,255,255,.1);stroke:#fff;stroke-width:1.6;stroke-dasharray:6 4;vector-effect:non-scaling-stroke;transition:fill .2s var(--ease),stroke .2s var(--ease)}
+.zone-label{fill:#fff;font-family:var(--font-display);font-weight:600;letter-spacing:.06em;text-anchor:middle;dominant-baseline:central;pointer-events:none;
+  paint-order:stroke;stroke:rgba(12,6,22,.7);stroke-width:3px;stroke-linejoin:round}
+.zone:hover .zone-shape{fill:rgba(255,255,255,.24);stroke-dasharray:none}
+.zone:focus-visible .zone-shape{fill:rgba(255,255,255,.24);stroke:var(--focus);stroke-width:3;stroke-dasharray:none}
+.zone.is-selected .zone-shape{fill:rgba(201,178,242,.55);stroke:#fff;stroke-width:3;stroke-dasharray:none}
+.zone.is-selected{filter:drop-shadow(0 0 7px rgba(255,255,255,.7))}
+.zone--link .zone-shape{fill:rgba(255,255,255,.04);stroke-dasharray:2 4}
+.zone--link.is-related .zone-shape{stroke:#fff;stroke-width:2.5;stroke-dasharray:none;fill:rgba(201,178,242,.3)}
+.zone--reserved .zone-shape,.zone--reserved:hover .zone-shape{fill:url(#hatch-reserved);stroke:#f5c46a}
+.zone--sponsored .zone-shape,.zone--sponsored:hover .zone-shape{fill:url(#hatch-sponsored);stroke:rgba(255,255,255,.6)}
+.zone--reserved.is-selected .zone-shape,.zone--sponsored.is-selected .zone-shape{stroke:#fff;stroke-width:3}
+.has-selection .zone:not(.is-selected):not(.is-related){opacity:.55}
+.has-selection .zone:hover,.has-selection .zone:focus-visible{opacity:1!important}
+.art-caption{font-family:var(--font-body);font-weight:600;font-size:12px;letter-spacing:.28em;fill:#62606c;text-anchor:middle}
+
+/* Detail panel */
+.panel{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px;scroll-margin-top:76px}
+@media (min-width:920px){.panel{position:sticky;top:76px}}
+.panel-close{position:absolute;top:10px;right:10px;display:grid;place-items:center;width:44px;height:44px;border:0;border-radius:2px;background:transparent;color:var(--muted);cursor:pointer}
+.panel-close:hover{background:var(--lilac-soft);color:var(--ink)}
+.panel-close svg{width:20px;height:20px}
+.panel .eyebrow{padding-right:44px}
+.panel h3{margin-top:10px;padding-right:36px;font-size:clamp(28px,3.4vw,34px)}
+.panel .sub{margin-top:6px;font-size:14px;color:var(--muted)}
+.price-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:16px;padding:14px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.price{font-family:var(--font-display);font-weight:600;font-size:48px;line-height:1;color:var(--purple-ink)}
+.price small{display:block;font-family:var(--font-body);font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.status{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border:1px solid;border-radius:999px;font-size:13px;font-weight:600;line-height:1.2;white-space:nowrap}
+.status svg{width:14px;height:14px;flex:none}
+.status--available{background:#e8f6ee;color:#135a35;border-color:#b5dfc5}
+.status--reserved{background:#fdf3df;color:#774900;border-color:#efd096}
+.status--sponsored{background:#efedf2;color:#3f3a4a;border-color:#d3cfdb}
+.slot-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:16px}
+.slot-btn{display:grid;gap:2px;min-height:56px;padding:8px;border:1.5px solid var(--line);border-radius:3px;background:#fff;cursor:pointer;text-align:center;font:inherit;color:var(--ink);transition:border-color .2s var(--ease),background-color .2s var(--ease)}
+.slot-btn:hover{border-color:var(--purple)}
+.slot-btn[aria-pressed="true"]{border-color:var(--purple-dark);background:var(--lilac-soft);box-shadow:inset 0 0 0 1px var(--purple-dark)}
+.slot-btn b{font-family:var(--font-display);font-size:15px;letter-spacing:.08em;text-transform:uppercase}
+.slot-btn span{font-size:12px;color:var(--muted)}
+.slot-btn.is-unavailable span{text-decoration:line-through}
+.panel-desc{margin-top:16px;color:var(--ink-2)}
+.panel h4{margin-top:20px;font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.24em;color:var(--muted)}
+.benefits{margin:10px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.benefits li{position:relative;padding-left:22px;font-size:15px}
+.benefits li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;background:var(--purple);transform:skewX(-18deg)}
+.panel-actions{display:grid;gap:10px;margin-top:22px}
+.panel-unavailable{margin-top:20px;padding:12px 14px;border-left:3px solid var(--purple);background:var(--lilac-soft);font-size:14px;color:var(--ink-2)}
+.panel-bundle{margin-top:4px;text-align:center}
+.panel-bundle .btn--text{font-size:14px;letter-spacing:.04em}
+.panel-empty .steps{margin:16px 0 0;padding:0;list-style:none;counter-reset:s;display:grid;gap:12px}
+.panel-empty .steps li{counter-increment:s;display:flex;gap:12px;font-size:15px;color:var(--ink-2)}
+.panel-empty .steps li::before{content:counter(s);flex:none;display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--black);color:#fff;font-family:var(--font-display);font-weight:700}
+.area-list{display:grid;gap:8px;margin-top:18px}
+.area-btn{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:52px;padding:10px 14px;border:1px solid var(--line);border-radius:3px;background:var(--bg);cursor:pointer;font:inherit;color:var(--ink);text-align:left;transition:border-color .2s var(--ease)}
+.area-btn:hover{border-color:var(--purple)}
+.area-btn b{font-family:var(--font-display);font-size:18px;letter-spacing:.06em;text-transform:uppercase}
+.area-btn span{font-size:13px;color:var(--muted);white-space:nowrap}
+
+/* Opportunities */
+.opp-groups{display:grid;gap:clamp(28px,4vw,40px)}
+.opp-group-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 16px;padding-bottom:14px;margin-bottom:14px;border-bottom:2px solid var(--black)}
+.opp-group-head h3{font-size:30px}
+.opp-group-head p{margin-top:6px;font-size:14px;color:var(--muted)}
+.opp-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr))}
+.opp-card{display:flex;flex-direction:column;gap:6px;width:100%;padding:18px;text-align:left;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-radius:var(--radius);cursor:pointer;
+  transition:border-color .2s var(--ease),box-shadow .2s var(--ease);touch-action:manipulation}
+.opp-card:hover{border-color:var(--purple)}
+.opp-card.is-selected{border-color:var(--purple-dark);box-shadow:inset 0 0 0 1.5px var(--purple-dark);background:var(--lilac-soft)}
+.opp-pos{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.opp-name{font-family:var(--font-display);font-weight:600;font-size:24px;text-transform:uppercase;letter-spacing:.03em;line-height:1.05}
+.opp-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px}
+.opp-price{font-family:var(--font-display);font-weight:600;font-size:28px;color:var(--purple-ink)}
+.opp-note{margin-top:24px;font-size:14px;color:var(--muted)}
+
+/* Why sponsor */
+.why-grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.why-card{padding:24px;background:#fff;border:1px solid var(--line);border-radius:var(--radius)}
+.why-card .num{font-family:var(--font-display);font-weight:600;font-size:15px;letter-spacing:.16em;color:var(--purple)}
+.why-card h3{margin-top:10px;font-size:24px}
+.why-card p{margin-top:10px;color:var(--ink-2);font-size:15px}
+.how{margin-top:clamp(36px,5vw,56px)}
+.how h3{font-size:26px}
+.how ol{margin:18px 0 0;padding:0;list-style:none;counter-reset:h;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.how li{counter-increment:h;padding:18px;border-top:3px solid var(--purple);background:#fff;border-radius:0 0 var(--radius) var(--radius);font-size:15px;color:var(--ink-2)}
+.how li::before{content:"0" counter(h);display:block;font-family:var(--font-display);font-weight:700;font-size:28px;color:var(--purple);line-height:1;margin-bottom:8px}
+.how li strong{display:block;color:var(--ink);margin-bottom:4px}
+
+.footer{padding:28px 0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);background:var(--bg)}
+.footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+.notice{display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:12px 14px;border:1px solid #efd096;border-left:4px solid #c98a12;background:#fdf7ea;border-radius:3px;font-size:14px;color:#5c3b00}
+.notice svg{width:18px;height:18px;flex:none;margin-top:1px}
+.notice strong{font-weight:600}
+.hero-disclaimer{margin-top:6px;text-align:center;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.debug-readout{margin-top:8px;padding:8px 12px;font:13px/1.4 ui-monospace,Menlo,monospace;background:#111;color:#9f9;border-radius:4px}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Back to top">
+      <span class="brand-mark" data-bind="team.shortName">UCC</span>
+      <span class="brand-name" data-bind="team.name">UiTM Cycling Club</span>
+    </a>
+    <nav class="topbar-nav" aria-label="Sections">
+      <a class="link" href="#explorer">Jersey</a>
+      <a class="link" href="#opportunities">Pricing</a>
+      <a class="btn btn--wa btn--sm" id="nav-wa" target="_blank" rel="noopener noreferrer"></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- SECTION A: HERO -->
+  <section class="hero" id="top">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow" id="hero-eyebrow"></p>
+        <p class="tagline" id="hero-tagline"></p>
+        <h1 id="hero-headline"></h1>
+        <p class="hero-intro" id="hero-intro"></p>
+        <div class="hero-actions">
+          <a class="btn btn--light" href="#explorer" id="hero-cta"></a>
+          <a class="btn btn--ghost-light" id="hero-wa" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+        <dl class="hero-facts" id="hero-facts"></dl>
+      </div>
+      <div class="hero-visual"><div id="hero-visual"></div><p class="hero-disclaimer" id="hero-disclaimer" hidden></p></div>
+    </div>
+  </section>
+
+  <!-- SECTION B: INTERACTIVE JERSEY -->
+  <section class="section" id="explorer">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Interactive Jersey</p>
+        <h2>Choose your logo slot</h2>
+        <p>Tap a sleeve to open its close-up and pick one of its three slots, or tap a slot on the rear pockets. Each slot shows its price and availability, and you can enquire straight from there.</p>
+        <p class="notice" id="design-notice" role="note" hidden></p>
+      </div>
+      <div class="explorer">
+        <div class="stage-card">
+          <div class="view-tabs" role="tablist" aria-label="Jersey views" id="view-tabs"></div>
+          <div class="stage" id="stage" role="tabpanel"></div>
+          <p class="stage-note" id="stage-note"></p>
+          <div class="stage-caption" id="stage-caption" aria-live="polite"></div>
+          <div class="legend" aria-hidden="true">
+            <span><i class="swatch"></i>Logo slot</span>
+            <span><i class="swatch swatch--link"></i>Tap to zoom</span>
+            <span><i class="swatch swatch--reserved"></i>Reserved</span>
+            <span><i class="swatch swatch--sponsored"></i>Sponsored</span>
+          </div>
+          <div id="debug-readout" class="debug-readout" hidden></div>
+        </div>
+        <aside class="panel" id="panel" aria-live="polite" tabindex="-1"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION C: SPONSORSHIP OPPORTUNITIES -->
+  <section class="section section--white" id="opportunities">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Sponsorship Opportunities</p>
+        <h2>Slots &amp; pricing</h2>
+        <p id="opp-intro"></p>
+      </div>
+      <div class="opp-groups" id="opp-groups"></div>
+      <p class="opp-note" id="opp-note"></p>
+    </div>
+  </section>
+
+  <!-- SECTION D: WHY SPONSOR US -->
+  <section class="section" id="why">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Why Sponsor Us?</p>
+        <h2>Ride. Train. Together.</h2>
+      </div>
+      <div class="why-grid" id="why-grid"></div>
+      <div class="how">
+        <h3>How sponsorship works</h3>
+        <ol id="how-list"></ol>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <span id="footer-team"></span>
+    <span>Ride / Train / Together</span>
+  </div>
+</footer>
+
+<noscript><p style="padding:16px;text-align:center">This interactive proposal needs JavaScript enabled.</p></noscript>
+
+<script>
+/* =========================================================================
+   ===================  CONFIGURATION — EDIT THIS SECTION  =================
+   Everything a non-developer needs to change lives in this block.
+   ========================================================================= */
+
+/* 1) TEAM, HEADLINE AND CONTACT DETAILS ---------------------------------- */
+const CONFIG = {
+  team: {
+    name: 'UiTM Cycling Club',
+    shortName: 'UCC',
+    proposalTitle: 'Jersey Sponsorship Proposal',
+    tagline: 'Ride / Train / Together',
+  },
+  hero: {
+    eyebrow: 'Jersey Sponsorship Proposal',
+    headline: 'Your Brand.|Our Ride.',          // "|" starts a new line
+    intro: 'Put your brand on the new UiTM Cycling Club team jersey. Choose a logo slot on the sleeves or rear pockets, see the price instantly, and talk to us on WhatsApp in one tap.',
+    ctaLabel: 'Explore Sponsorship Opportunities',
+  },
+
+  /* HOW TO UPDATE CONTACT NUMBERS
+     - whatsappNumber: international format, digits only, no "+", spaces or dashes
+       (Malaysia 017-922 0286  ->  60179220286)
+     - phoneNumber: used for the tel: link, international format with "+"
+     - *Display: how the number is shown on screen
+     - email: leave '' to hide all email buttons                                  */
+  contact: {
+    whatsappNumber: '60179220286',
+    whatsappDisplay: '+60 17-922 0286',
+    phoneNumber: '+60179220286',
+    phoneDisplay: '017-922 0286',
+    email: '',                               // e.g. 'sponsorship@example.com'
+  },
+
+  // Shown above the jersey, under the hero jersey and in the pricing notes. '' to hide.
+  designDisclaimer: 'The jersey design shown is a concept and is not final. Colours, artwork, logo slot positions and sizes may change in the final production design.',
+
+  currency: 'RM',
+  priceNote: 'per logo slot',                // shown under each price; '' to hide
+  pricingFootnote: 'All prices are in Malaysian Ringgit (RM), per logo slot. Final sponsorship terms and logo artwork requirements are confirmed directly with the club.',
+
+  debug: false,                              // true (or add ?debug=1 to the URL) shows hotspot coordinates on click
+};
+
+/* 2) JERSEY VIEWS AND ARTWORK --------------------------------------------
+   HOW TO REPLACE THE JERSEY ARTWORK
+   - Leave `image` empty to use the built-in UCC jersey drawing.
+   - To use your own mockup, set `image` to a public HTTPS URL (or a file
+     placed next to index.html in the same GitHub repository, e.g. 'back.png')
+     and set `width` / `height` to that image's pixel size.
+   - Hotspot coordinates are percentages of the artwork, so after replacing
+     an image, re-check positions with ?debug=1 (click a point to read its %).  */
+const VIEWS = [
+  { id: 'front',        label: 'Front',        image: '', width: 500, height: 600, note: 'Front view. Tap a sleeve to see its three logo slots.' },
+  { id: 'back',         label: 'Back',         image: '', width: 500, height: 600, note: 'Back view. Logo slots sit on the three rear pockets.' },
+  { id: 'right-sleeve', label: 'Right Sleeve', image: '', width: 500, height: 600, note: 'Rider\'s right sleeve, outer side. Slot 1 is nearest the shoulder.' },
+  { id: 'left-sleeve',  label: 'Left Sleeve',  image: '', width: 500, height: 600, note: 'Rider\'s left sleeve, outer side. Slot 1 is nearest the shoulder.' },
+];
+
+/* 3) SPONSORSHIP AREAS ---------------------------------------------------
+   Groups slots together (used for the pricing list and the "all slots" enquiry).
+   `view` is the close-up view that shows the area's slots.                 */
+const AREAS = [
+  { id: 'right-sleeve', name: 'Right Sleeve', view: 'right-sleeve', summary: 'Three logo slots on the outer right sleeve, visible from the side, front and back.' },
+  { id: 'left-sleeve',  name: 'Left Sleeve',  view: 'left-sleeve',  summary: 'Three logo slots on the outer left sleeve, visible from the side, front and back.' },
+  { id: 'back-pockets', name: 'Back Pockets', view: 'back',         summary: 'Three logo slots across the rear pockets, at eye level for riders following behind.' },
+];
+
+/* 4) LOGO SLOTS (the things sponsors buy) --------------------------------
+   HOW TO CHANGE PRICES        -> edit `price` (number, in RM, no commas).
+   HOW TO MARK RESERVED/SOLD   -> set `status` to 'available', 'reserved' or 'sponsored'.
+   HOW TO ADD A SLOT           -> copy one { ... } block, give it a unique `id`,
+                                  the right `area`, and draw its zone.
+   HOW TO REMOVE A SLOT        -> delete its { ... } block.
+   HOW TO ADJUST HOTSPOTS      -> `zones` lists where the slot is drawn. Coordinates
+                                  are % of the artwork (500 x 600 for the built-in drawing):
+       rect:    { view, type:'rect', x, y, w, h }   (top-left corner + size)
+       polygon: { view, type:'poly', points:[[x,y], [x,y], ...] }
+     `tag` is the short text shown on the jersey before the price (e.g. 'SLOT 1').
+   `enquiry` is the main contact action: 'whatsapp', 'phone' or 'email'.          */
+const SLEEVE_SLOT_Y = { 1: 34.17, 2: 48.33, 3: 62.5 };   // vertical position of sleeve slots 1–3 (%)
+const SLEEVE_BENEFITS = ['Visible from the side, front and back', 'Seen in side-on riding and group photos', 'Affordable entry-level placement'];
+const POCKET_BENEFITS = ['At eye level for riders following in the group', 'Visible in every rear-facing ride photo', 'Sits below the main UCC back logo'];
+
+const PLACEMENTS = [
+  // ---- Right sleeve: 3 slots @ RM250 ----
+  { id: 'rs-1', area: 'right-sleeve', name: 'Right Sleeve — Slot 1', position: 'Upper · near shoulder', tag: 'SLOT 1', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Upper logo position on the outer right sleeve, just below the shoulder seam.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[1], w: 30, h: 9.5 }] },
+  { id: 'rs-2', area: 'right-sleeve', name: 'Right Sleeve — Slot 2', position: 'Middle', tag: 'SLOT 2', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Centre of the outer right sleeve, the most visible sleeve position in side-on riding photos.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[2], w: 30, h: 9.5 }] },
+  { id: 'rs-3', area: 'right-sleeve', name: 'Right Sleeve — Slot 3', position: 'Lower · near cuff', tag: 'SLOT 3', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Lower logo position near the sleeve hem, clearly visible while riding.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[3], w: 30, h: 9.5 }] },
+
+  // ---- Left sleeve: 3 slots @ RM250 ----
+  { id: 'ls-1', area: 'left-sleeve', name: 'Left Sleeve — Slot 1', position: 'Upper · near shoulder', tag: 'SLOT 1', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Upper logo position on the outer left sleeve, just below the shoulder seam.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[1], w: 30, h: 9.5 }] },
+  { id: 'ls-2', area: 'left-sleeve', name: 'Left Sleeve — Slot 2', position: 'Middle', tag: 'SLOT 2', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Centre of the outer left sleeve, the most visible sleeve position in side-on riding photos.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[2], w: 30, h: 9.5 }] },
+  { id: 'ls-3', area: 'left-sleeve', name: 'Left Sleeve — Slot 3', position: 'Lower · near cuff', tag: 'SLOT 3', price: 250, status: 'available', enquiry: 'whatsapp',
+    description: 'Lower logo position near the sleeve hem, clearly visible while riding.', benefits: SLEEVE_BENEFITS,
+    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[3], w: 30, h: 9.5 }] },
+
+  // ---- Back pockets: left / centre / right @ RM350 ----
+  { id: 'pk-left', area: 'back-pockets', name: 'Back Pocket — Left', position: 'Left pocket', tag: 'LEFT', price: 350, status: 'available', enquiry: 'whatsapp',
+    description: 'Logo on the left rear pocket (as seen from behind), at eye level for riders following in the group.', benefits: POCKET_BENEFITS,
+    zones: [{ view: 'back', type: 'rect', x: 32.13, y: 74.67, w: 9.6, h: 7.33 }] },
+  { id: 'pk-centre', area: 'back-pockets', name: 'Back Pocket — Centre', position: 'Centre pocket', tag: 'CENTRE', price: 350, status: 'available', enquiry: 'whatsapp',
+    description: 'Logo on the centre rear pocket, above the reflective strip. The most central sponsor position on the back.', benefits: POCKET_BENEFITS,
+    zones: [{ view: 'back', type: 'rect', x: 45.2, y: 74.67, w: 9.6, h: 7.33 }] },
+  { id: 'pk-right', area: 'back-pockets', name: 'Back Pocket — Right', position: 'Right pocket', tag: 'RIGHT', price: 350, status: 'available', enquiry: 'whatsapp',
+    description: 'Logo on the right rear pocket (as seen from behind), at eye level for riders following in the group.', benefits: POCKET_BENEFITS,
+    zones: [{ view: 'back', type: 'rect', x: 58.27, y: 74.67, w: 9.6, h: 7.33 }] },
+];
+
+/* 5) ZOOM SHORTCUTS -----------------------------------------------------
+   Outlined areas on the Front/Back views that open a close-up view
+   (the sleeve slots are too small to tap comfortably on the full jersey).
+   On the front, the rider's RIGHT sleeve is on the viewer's LEFT.         */
+const VIEW_LINKS = [
+  { view: 'front', area: 'right-sleeve', type: 'poly', points: [[29.6, 13.67], [10, 25], [16, 38], [25.6, 34.67]] },
+  { view: 'front', area: 'left-sleeve',  type: 'poly', points: [[70.4, 13.67], [90, 25], [84, 38], [74.4, 34.67]] },
+  { view: 'back',  area: 'left-sleeve',  type: 'poly', points: [[29.6, 13.67], [10, 25], [16, 38], [25.6, 34.67]] },
+  { view: 'back',  area: 'right-sleeve', type: 'poly', points: [[70.4, 13.67], [90, 25], [84, 38], [74.4, 34.67]] },
+];
+
+/* 6) "WHY SPONSOR US?" CONTENT ------------------------------------------
+   Edit freely. Only add achievements, race results or audience figures
+   that the club can verify.                                               */
+const WHY_SPONSOR = [
+  { title: 'University community', text: 'UiTM Cycling Club brings together students and cycling enthusiasts from the UiTM community. Your brand rides with every member who wears the kit.' },
+  { title: 'Rides & events', text: 'The jersey is worn on club training rides, group rides and the cycling events the club takes part in throughout the season.' },
+  { title: 'Photos & social media', text: 'Club activities are photographed and shared online, giving your logo visibility well beyond the ride itself.' },
+  { title: 'Support student riders', text: 'Sponsorship helps the club produce its kit and run activities, supporting student cyclists and a healthy, active campus.' },
+];
+
+const HOW_IT_WORKS = [
+  { title: 'Choose a slot', text: 'Pick one or more logo slots on the sleeves or rear pockets.' },
+  { title: 'Contact us', text: 'Message or call us to confirm availability and terms.' },
+  { title: 'Send your logo', text: 'Provide your logo artwork for placement on the design.' },
+  { title: 'Ride together', text: 'Your brand goes into production on the team jersey.' },
+];
+
+/* =========================================================================
+   ==========  APPLICATION CODE — no edits needed below this line  =========
+   ========================================================================= */
+
+const state = { view: VIEWS[0].id, selected: null };
+const DEBUG = CONFIG.debug || /[?&]debug=1/.test(location.search);
+
+/* ---------- helpers ---------- */
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const formatPrice = (n) => CONFIG.currency + Number(n).toLocaleString('en-MY');
+const getView = (id) => VIEWS.find((v) => v.id === id);
+const getPlacement = (id) => PLACEMENTS.find((p) => p.id === id);
+const getArea = (id) => AREAS.find((a) => a.id === id);
+const slotsIn = (areaId) => PLACEMENTS.filter((p) => p.area === areaId);
+const primaryView = (pl) => getArea(pl.area)?.view || pl.zones[0].view;
+const available = (list = PLACEMENTS) => list.filter((p) => p.status === 'available');
+const priceSummary = (list) => {
+  const ps = list.map((p) => p.price);
+  const min = Math.min(...ps), max = Math.max(...ps);
+  return min === max ? `${formatPrice(min)} each` : `from ${formatPrice(min)}`;
+};
+
+const ICONS = {
+  chat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>',
+  phone: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>',
+  mail: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,6 12,13 2,6"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>',
+  clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+  lock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>',
+  close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  info: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
+  arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+};
+
+const STATUS = {
+  available: { label: 'Available', icon: ICONS.check, zoneText: null },
+  reserved:  { label: 'Reserved',  icon: ICONS.clock, zoneText: 'RESERVED' },
+  sponsored: { label: 'Sponsored', icon: ICONS.lock,  zoneText: 'SPONSORED' },
+};
+const statusOf = (pl) => STATUS[pl.status] || STATUS.available;
+const statusBadge = (pl) => `<span class="status status--${esc(pl.status)}">${statusOf(pl).icon}${statusOf(pl).label}</span>`;
+
+/* ---------- contact links ---------- */
+function enquiryMessage(pl) {
+  const team = CONFIG.team.name;
+  if (!pl) return `Hello, I am interested in sponsoring the ${team} cycling jersey. I would like to know more about the available logo slots.`;
+  if (pl.status === 'available') {
+    return `Hello, I am interested in the ${pl.name} placement for the ${team} cycling jersey sponsorship proposal, listed at ${formatPrice(pl.price)}. I would like to know more about the sponsorship opportunity.`;
+  }
+  return `Hello, I saw that the ${pl.name} placement on the ${team} jersey is ${statusOf(pl).label.toLowerCase()}. I would like to know which other logo slots are still available.`;
+}
+function areaMessage(area, slots) {
+  const total = slots.reduce((s, p) => s + p.price, 0);
+  return `Hello, I am interested in sponsoring all ${slots.length} available ${area.name} logo slots (${slots.map((p) => p.tag).join(', ')}) on the ${CONFIG.team.name} cycling jersey, listed at ${formatPrice(total)} in total. I would like to know more about the sponsorship opportunity.`;
+}
+const waLink = (msg) => `https://wa.me/${CONFIG.contact.whatsappNumber}?text=${encodeURIComponent(msg)}`;
+const telLink = () => `tel:${CONFIG.contact.phoneNumber}`;
+const mailLink = (msg, subject) => `mailto:${CONFIG.contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+
+function contactButtons(pl, opts = {}) {
+  const msg = enquiryMessage(pl);
+  const unavailable = pl && pl.status !== 'available';
+  const primaryLabel = opts.primaryLabel || (pl ? (unavailable ? 'Ask About Other Slots' : 'Enquire About This Slot') : 'WhatsApp Us');
+  const subject = pl ? `Jersey sponsorship enquiry: ${pl.name}` : `${CONFIG.team.name} jersey sponsorship enquiry`;
+  const ghost = opts.dark ? 'btn--ghost-light' : 'btn--outline';
+  const wa = `<a class="btn btn--wa btn--block" href="${esc(waLink(msg))}" target="_blank" rel="noopener noreferrer">${ICONS.chat}${esc(primaryLabel)}<span class="visually-hidden"> on WhatsApp (opens in a new tab)</span></a>`;
+  const call = `<a class="btn ${ghost} btn--block" href="${esc(telLink())}">${ICONS.phone}Contact for Further Info</a>`;
+  const mail = CONFIG.contact.email ? `<a class="btn ${ghost} btn--block" href="${esc(mailLink(msg, subject))}">${ICONS.mail}Email Enquiry</a>` : '';
+  const order = { whatsapp: [wa, call, mail], phone: [call, wa, mail], email: [mail || wa, mail ? wa : call, mail ? call : ''] };
+  return (order[pl?.enquiry] || order.whatsapp).join('');
+}
+
+/* =========================================================================
+   JERSEY ARTWORK — built-in SVG drawings of the UCC concept (500 x 600).
+   Replaced automatically when a view has an `image` set in VIEWS.
+   ========================================================================= */
+const K = { base: '#1b0d33', strokes: ['#8a3cf0', '#7428d8', '#5f1fb5', '#3d1480', '#24104a'], black: '#0d0816', side: '#110a1c', white: '#ffffff', grey: '#cfcfd6' };
+const JERSEY_FRONT = 'M205 55 C225 80 275 80 295 55 L350 78 L455 150 L420 235 L372 210 L370 560 Q250 572 130 560 L128 210 L80 235 L45 150 L150 78 Z';
+const JERSEY_BACK  = 'M205 52 C225 60 275 60 295 52 L350 78 L455 150 L420 235 L372 210 L370 560 Q250 572 130 560 L128 210 L80 235 L45 150 L150 78 Z';
+const SLEEVE = 'M135 480 L116 235 C110 105 390 105 384 235 L365 480 Z';
+const WORDMARK = 'Barlow, "Arial Black", Arial, sans-serif';
+
+// Small seeded random generator so the brush pattern is identical on every load.
+function seeded(seed) {
+  return () => {
+    seed = (seed + 0x6D2B79F5) | 0;
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+// Diagonal brush-stroke camo, as on the concept jersey.
+function brushPattern(p, seed) {
+  const r = seeded(seed);
+  const poly = (cx, cy, len, w, deg, jag) => {
+    const a = deg * Math.PI / 180, dx = Math.cos(a), dy = Math.sin(a), nx = -dy, ny = dx;
+    const h = len / 2, hw = w / 2, j1 = (r() - .5) * jag, j2 = (r() - .5) * jag;
+    const pts = [
+      [cx - dx * h - nx * hw, cy - dy * h - ny * hw],
+      [cx + dx * (h + j1) - nx * hw, cy + dy * (h + j1) - ny * hw],
+      [cx + dx * h + nx * hw, cy + dy * h + ny * hw],
+      [cx - dx * (h + j2) + nx * hw, cy - dy * (h + j2) + ny * hw],
+    ];
+    return pts.map((q) => q.map((v) => v.toFixed(1)).join(',')).join(' ');
+  };
+  let out = `<rect width="500" height="600" fill="${K.base}"/>`;
+  for (let i = 0; i < 6; i++) {
+    out += `<polygon points="${poly(r() * 600 - 50, r() * 600, 700, 40 + r() * 60, 60 + r() * 6, 0)}" fill="${K.black}" opacity="${(.35 + r() * .3).toFixed(2)}"/>`;
+  }
+  for (let i = 0; i < 95; i++) {
+    const col = K.strokes[Math.floor(r() * K.strokes.length)];
+    out += `<polygon points="${poly(r() * 580 - 40, r() * 680 - 40, 30 + r() * 190, 3 + r() * 24, 56 + r() * 12, 40)}" fill="${col}" opacity="${(.3 + r() * .6).toFixed(2)}"/>`;
+  }
+  out += `<g opacity=".4"><rect x="40" y="120" width="70" height="320" fill="url(#${p}-dots)" transform="rotate(-28 75 280)"/>
+          <rect x="360" y="40" width="60" height="260" fill="url(#${p}-dots)" transform="rotate(-28 390 170)"/>
+          <rect x="300" y="330" width="50" height="220" fill="url(#${p}-dots)" transform="rotate(-28 325 440)"/></g>`;
+  return out;
+}
+
+function artDefs(p) {
+  return `<defs>
+    <pattern id="${p}-dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.25" fill="#b07cff"/></pattern>
+    <linearGradient id="${p}-shade" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#000" stop-opacity=".28"/><stop offset=".22" stop-color="#000" stop-opacity="0"/><stop offset=".78" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+    <linearGradient id="${p}-vshade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".15"/><stop offset=".5" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".35"/></linearGradient>
+    <linearGradient id="${p}-reflect" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f2f2f5"/><stop offset="1" stop-color="#9c9ca6"/></linearGradient>
+    <filter id="${p}-shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#120c1c" flood-opacity=".32"/></filter>
+  </defs>`;
+}
+
+function torso(p, seed) {
+  return `
+    ${brushPattern(p, seed)}
+    <polygon points="128,212 148,216 152,560 128,560" fill="${K.side}"/>
+    <polygon points="372,212 352,216 348,560 372,560" fill="${K.side}"/>
+    <path d="M212 60 Q170 120 128 210" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M288 60 Q330 120 372 210" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+    <polygon points="45,150 80,235 88,231 53,146" fill="${K.black}"/>
+    <polygon points="455,150 420,235 412,231 447,146" fill="${K.black}"/>
+    <rect width="500" height="600" fill="url(#${p}-shade)"/>
+    <rect width="500" height="600" fill="url(#${p}-vshade)"/>
+    <path d="M120 548 Q250 560 380 548 L380 600 L120 600 Z" fill="${K.black}"/>`;
+}
+
+const ARTWORK = {
+  front(p) {
+    return `${artDefs(p)}<clipPath id="${p}-clip"><path d="${JERSEY_FRONT}"/></clipPath>
+      <path d="M207 52 C222 40 278 40 293 52 L293 60 C278 50 222 50 207 60 Z" fill="${K.black}"/>
+      <text x="250" y="53" text-anchor="middle" font-family="${WORDMARK}" font-style="italic" font-weight="800" font-size="7" fill="#fff" letter-spacing="1">/// UCC ///</text>
+      <g filter="url(#${p}-shadow)"><path d="${JERSEY_FRONT}" fill="${K.base}"/></g>
+      <g clip-path="url(#${p}-clip)">
+        ${torso(p, 7)}
+        <text x="250" y="262" text-anchor="middle" font-family="${WORDMARK}" font-style="italic" font-weight="800" font-size="76" letter-spacing="1" fill="#fff">UCC</text>
+        <line x1="250" y1="76" x2="250" y2="566" stroke="${K.black}" stroke-width="3"/>
+        <line x1="250" y1="76" x2="250" y2="566" stroke="#fff" stroke-opacity=".12" stroke-width="1"/>
+      </g>
+      <path d="M205 55 C225 80 275 80 295 55 L291 49 C272 70 228 70 209 49 Z" fill="${K.black}"/>
+      <rect x="246" y="74" width="8" height="18" rx="2" fill="#2a2333"/>
+      <path d="${JERSEY_FRONT}" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="1.5"/>`;
+  },
+  back(p) {
+    return `${artDefs(p)}<clipPath id="${p}-clip"><path d="${JERSEY_BACK}"/></clipPath>
+      <g filter="url(#${p}-shadow)"><path d="${JERSEY_BACK}" fill="${K.base}"/></g>
+      <g clip-path="url(#${p}-clip)">
+        ${torso(p, 23)}
+        <text x="250" y="108" text-anchor="middle" font-family="${WORDMARK}" font-style="italic" font-weight="800" font-size="20" fill="#fff">///</text>
+        <text x="250" y="212" text-anchor="middle" font-family="${WORDMARK}" font-style="italic" font-weight="800" font-size="84" letter-spacing="1" fill="#fff">UCC</text>
+        <text x="250" y="242" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-weight="500" font-size="12" letter-spacing="5" fill="#fff" opacity=".92">UiTM CYCLING CLUB</text>
+        <rect x="152" y="430" width="196" height="122" fill="${K.black}" opacity=".35"/>
+        <line x1="152" y1="431" x2="348" y2="431" stroke="${K.black}" stroke-width="4"/>
+        <line x1="217.3" y1="433" x2="217.3" y2="550" stroke="${K.black}" stroke-width="2.5"/>
+        <line x1="282.7" y1="433" x2="282.7" y2="550" stroke="${K.black}" stroke-width="2.5"/>
+        <rect x="247" y="506" width="6" height="36" rx="1" fill="url(#${p}-reflect)"/>
+      </g>
+      <path d="M205 52 C225 60 275 60 295 52 L292 46 C272 54 228 54 208 46 Z" fill="${K.black}"/>
+      <path d="${JERSEY_BACK}" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="1.5"/>`;
+  },
+  sleeve(p, side) {
+    const flip = side === 'right' ? ' transform="translate(500 0) scale(-1 1)"' : '';
+    const caption = side === 'right' ? 'RIGHT SLEEVE · OUTER' : 'LEFT SLEEVE · OUTER';
+    const dir = side === 'right' ? 'FRONT OF JERSEY →' : '← FRONT OF JERSEY';
+    return `${artDefs(p)}<clipPath id="${p}-clip"><path d="${SLEEVE}"/></clipPath>
+      <g filter="url(#${p}-shadow)"><path d="${SLEEVE}" fill="${K.base}"/></g>
+      <g clip-path="url(#${p}-clip)">
+        <g${flip}>${brushPattern(p, side === 'right' ? 41 : 59)}</g>
+        <rect width="500" height="600" fill="url(#${p}-shade)"/>
+        <rect width="500" height="600" fill="url(#${p}-vshade)"/>
+        <path d="M110 165 Q250 120 390 165" fill="none" stroke="#000" stroke-opacity=".35" stroke-width="2"/>
+        <rect x="100" y="452" width="300" height="30" fill="${K.black}"/>
+      </g>
+      <path d="${SLEEVE}" fill="none" stroke="#000" stroke-opacity=".4" stroke-width="1.5"/>
+      <text class="art-caption" x="250" y="528">${caption}</text>
+      <text class="art-caption" x="250" y="556" style="font-size:11px;opacity:.8">${dir}</text>`;
+  },
+};
+
+function artworkFor(view, prefix) {
+  if (view.image) {
+    return `<image href="${esc(view.image)}" x="0" y="0" width="${view.width}" height="${view.height}" preserveAspectRatio="xMidYMid meet"/>`;
+  }
+  switch (view.id) {
+    case 'front': return ARTWORK.front(prefix);
+    case 'back': return ARTWORK.back(prefix);
+    case 'left-sleeve': return ARTWORK.sleeve(prefix, 'left');
+    case 'right-sleeve': return ARTWORK.sleeve(prefix, 'right');
+    default: return '';
+  }
+}
+
+/* =========================================================================
+   RENDERING
+   ========================================================================= */
+function renderStatic() {
+  document.querySelectorAll('[data-bind]').forEach((el) => {
+    const val = el.dataset.bind.split('.').reduce((o, k) => o?.[k], CONFIG);
+    if (val) el.textContent = val;
+  });
+  document.title = `${CONFIG.team.name} — ${CONFIG.team.proposalTitle}`;
+
+  $('#nav-wa').href = waLink(enquiryMessage(null));
+  $('#nav-wa').innerHTML = `${ICONS.chat}<span>WhatsApp</span>`;
+
+  // Hero
+  $('#hero-eyebrow').textContent = `${CONFIG.team.name} · ${CONFIG.hero.eyebrow}`;
+  $('#hero-tagline').textContent = CONFIG.team.tagline;
+  const [l1, l2] = CONFIG.hero.headline.split('|');
+  $('#hero-headline').innerHTML = esc(l1) + (l2 ? `<span>${esc(l2)}</span>` : '');
+  $('#hero-intro').textContent = CONFIG.hero.intro;
+  $('#hero-cta').textContent = CONFIG.hero.ctaLabel;
+  const heroWa = $('#hero-wa');
+  heroWa.href = waLink(enquiryMessage(null));
+  heroWa.innerHTML = `${ICONS.chat}WhatsApp Us`;
+
+  const prices = PLACEMENTS.map((p) => p.price);
+  const min = Math.min(...prices), max = Math.max(...prices);
+  const range = min === max ? formatPrice(min) : `${formatPrice(min)}–${formatPrice(max)}`;
+  $('#hero-facts').innerHTML = `
+    <div><dt>Logo slots</dt><dd>${PLACEMENTS.length}</dd></div>
+    <div><dt>Per slot</dt><dd>${range}</dd></div>
+    <div><dt>Available</dt><dd>${available().length} of ${PLACEMENTS.length}</dd></div>`;
+
+  $('#hero-visual').innerHTML = `<svg viewBox="0 0 920 640" role="img" aria-label="UCC purple team jersey concept, front and back">
+      <g transform="translate(400 0) scale(.94)"><svg width="500" height="600" viewBox="0 0 500 600" overflow="visible">${ARTWORK.back('hb')}</svg></g>
+      <g transform="translate(10 30)"><svg width="500" height="600" viewBox="0 0 500 600" overflow="visible">${ARTWORK.front('hf')}</svg></g>
+    </svg>`;
+
+  const avail = available().map((p) => p.price);
+  const from = formatPrice(avail.length ? Math.min(...avail) : min);
+  $('#opp-intro').textContent = `${PLACEMENTS.length} logo slots across the sleeves and rear pockets, starting from ${from}. Select any slot to see it on the jersey.`;
+  $('#opp-note').textContent = [CONFIG.pricingFootnote, CONFIG.designDisclaimer].filter(Boolean).join(' ');
+  if (CONFIG.designDisclaimer) {
+    const notice = $('#design-notice');
+    notice.innerHTML = `${ICONS.info}<span><strong>Design not final.</strong> ${esc(CONFIG.designDisclaimer)}</span>`;
+    notice.hidden = false;
+    const hd = $('#hero-disclaimer');
+    hd.textContent = 'Concept design — not final, subject to change';
+    hd.hidden = false;
+  }
+
+  $('#why-grid').innerHTML = WHY_SPONSOR.map((w, i) => `
+    <article class="why-card"><p class="num">${String(i + 1).padStart(2, '0')}</p><h3>${esc(w.title)}</h3><p>${esc(w.text)}</p></article>`).join('');
+  $('#how-list').innerHTML = HOW_IT_WORKS.map((h) => `<li><strong>${esc(h.title)}</strong>${esc(h.text)}</li>`).join('');
+
+  $('#footer-team').textContent = `© ${new Date().getFullYear()} ${CONFIG.team.name} (${CONFIG.team.shortName})`;
+}
+
+function renderTabs() {
+  $('#view-tabs').innerHTML = VIEWS.map((v) => {
+    const n = PLACEMENTS.filter((p) => p.zones.some((z) => z.view === v.id)).length;
+    const sel = v.id === state.view;
+    return `<button class="view-tab" role="tab" id="tab-${v.id}" data-view="${v.id}" aria-selected="${sel}" aria-controls="stage" tabindex="${sel ? 0 : -1}">${esc(v.label)}${n ? `<span class="count" aria-label="${n} slots">${n}</span>` : ''}</button>`;
+  }).join('');
+  const strip = $('#view-tabs'), active = $(`#tab-${state.view}`);
+  if (active.offsetLeft < strip.scrollLeft || active.offsetLeft + active.offsetWidth > strip.scrollLeft + strip.clientWidth) {
+    strip.scrollLeft = active.offsetLeft - 8;
+  }
+}
+
+function shapeFor(z, view) {
+  const sx = view.width / 100, sy = view.height / 100;
+  if (z.type === 'rect') {
+    const bb = { x: z.x * sx, y: z.y * sy, w: z.w * sx, h: z.h * sy };
+    return { bb, svg: `<rect class="zone-shape" x="${bb.x}" y="${bb.y}" width="${bb.w}" height="${bb.h}" rx="2"/>` };
+  }
+  const pts = z.points.map(([x, y]) => [x * sx, y * sy]);
+  const xs = pts.map((q) => q[0]), ys = pts.map((q) => q[1]);
+  const bb = { x: Math.min(...xs), y: Math.min(...ys), w: Math.max(...xs) - Math.min(...xs), h: Math.max(...ys) - Math.min(...ys) };
+  return { bb, svg: `<polygon class="zone-shape" points="${pts.map((q) => q.join(',')).join(' ')}"/>` };
+}
+
+// Fit text inside a zone; tries each candidate (longest first) and uses the first that is readable.
+function labelFor(bb, view, candidates) {
+  const k = view.width / 500;
+  for (const text of candidates) {
+    const size = Math.min(bb.h * 0.42, (bb.w * 0.84) / (text.length * 0.55), 24 * k);
+    if (size >= 11 * k) return `<text class="zone-label" x="${bb.x + bb.w / 2}" y="${bb.y + bb.h / 2}" font-size="${size.toFixed(1)}">${esc(text)}</text>`;
+  }
+  return '';
+}
+
+function zoneMarkup(pl, view) {
+  const st = statusOf(pl);
+  const value = st.zoneText || formatPrice(pl.price);
+  const shapes = pl.zones.filter((z) => z.view === view.id).map((z) => {
+    const { bb, svg } = shapeFor(z, view);
+    const text = z.label === false ? '' : labelFor(bb, view, pl.tag ? [`${pl.tag} · ${value}`, value] : [value]);
+    return svg + text;
+  }).join('');
+  const aria = `${pl.name}, ${formatPrice(pl.price)}, ${st.label}`;
+  return `<g class="zone zone--${esc(pl.status)}" data-id="${esc(pl.id)}" role="button" tabindex="0" aria-label="${esc(aria)}" aria-pressed="false"><title>${esc(aria)}</title>${shapes}</g>`;
+}
+
+function linkMarkup(link, view) {
+  const area = getArea(link.area);
+  const slots = slotsIn(area.id);
+  const { bb, svg } = shapeFor(link, view);
+  const open = available(slots).length;
+  const text = labelFor(bb, view, [`${slots.length} SLOTS`]);
+  const aria = `${area.name}: ${slots.length} logo slots, ${open} available, ${priceSummary(slots)}. Open close-up view`;
+  return `<g class="zone zone--link" data-target="${esc(area.view)}" data-area="${esc(area.id)}" role="button" tabindex="0" aria-label="${esc(aria)}"><title>${esc(aria)}</title>${svg}${text}</g>`;
+}
+
+function renderStage() {
+  const view = getView(state.view);
+  const zones = PLACEMENTS.filter((p) => p.zones.some((z) => z.view === view.id));
+  const links = VIEW_LINKS.filter((l) => l.view === view.id && getArea(l.area));
+  const stage = $('#stage');
+  stage.style.aspectRatio = `${view.width} / ${view.height}`;
+  stage.setAttribute('aria-labelledby', `tab-${view.id}`);
+  const grid = DEBUG ? Array.from({ length: 9 }, (_, i) => {
+    const gx = (i + 1) * view.width / 10, gy = (i + 1) * view.height / 10;
+    return `<line x1="${gx}" y1="0" x2="${gx}" y2="${view.height}"/><line x1="0" y1="${gy}" x2="${view.width}" y2="${gy}"/>`;
+  }).join('') : '';
+  stage.innerHTML = `<svg viewBox="0 0 ${view.width} ${view.height}" role="group" aria-label="${esc(view.label)} view">
+      <defs>
+        <pattern id="hatch-reserved" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="rgba(240,170,60,.25)"/><rect width="3" height="8" fill="rgba(245,196,106,.7)"/></pattern>
+        <pattern id="hatch-sponsored" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="8" height="8" fill="rgba(10,5,18,.65)"/><rect width="2" height="8" fill="rgba(255,255,255,.3)"/></pattern>
+      </defs>
+      <g aria-hidden="true">${artworkFor(view, 'st')}</g>
+      ${DEBUG ? `<g stroke="#0f0" stroke-opacity=".4" stroke-width="1" pointer-events="none">${grid}</g>` : ''}
+      <g class="zones">${links.map((l) => linkMarkup(l, view)).join('')}${zones.map((p) => zoneMarkup(p, view)).join('')}</g>
+    </svg>`;
+  $('#stage-note').textContent = view.note || '';
+  syncSelection();
+}
+
+function renderPanel() {
+  const panel = $('#panel');
+  const pl = getPlacement(state.selected);
+  if (!pl) {
+    panel.innerHTML = `<div class="panel-empty">
+        <p class="eyebrow">How to use</p>
+        <h3>Select a logo slot</h3>
+        <ol class="steps">
+          <li>Switch between Front, Back and the sleeve close-ups.</li>
+          <li>Click or tap an outlined slot on the jersey.</li>
+          <li>See its price and availability, then enquire in one tap.</li>
+        </ol>
+        <div class="area-list">${AREAS.map((a) => {
+          const slots = slotsIn(a.id);
+          return `<button class="area-btn" type="button" data-area-view="${esc(a.view)}"><b>${esc(a.name)}</b><span>${slots.length} slots · ${priceSummary(slots)}</span></button>`;
+        }).join('')}</div>
+        <div class="panel-actions">${contactButtons(null, { primaryLabel: 'General Sponsorship Enquiry' })}</div>
+      </div>`;
+    return;
+  }
+  const area = getArea(pl.area);
+  const siblings = slotsIn(pl.area);
+  const openSiblings = available(siblings);
+  const unavailable = pl.status !== 'available';
+  const bundle = area && openSiblings.length > 1
+    ? `<div class="panel-bundle"><a class="btn btn--text" href="${esc(waLink(areaMessage(area, openSiblings)))}" target="_blank" rel="noopener noreferrer">Enquire about all ${openSiblings.length} ${esc(area.name)} slots · ${formatPrice(openSiblings.reduce((s, p) => s + p.price, 0))}</a></div>` : '';
+  panel.innerHTML = `
+    <button class="panel-close" type="button" data-action="close" aria-label="Close slot details">${ICONS.close}</button>
+    <p class="eyebrow">${esc(area ? area.name : 'Logo slot')}</p>
+    <h3>${esc(pl.name)}</h3>
+    ${pl.position ? `<p class="sub">${esc(pl.position)}</p>` : ''}
+    <div class="price-row">
+      <p class="price">${formatPrice(pl.price)}${CONFIG.priceNote ? `<small>${esc(CONFIG.priceNote)}</small>` : ''}</p>
+      ${statusBadge(pl)}
+    </div>
+    ${siblings.length > 1 ? `<div class="slot-switch" role="group" aria-label="Slots in ${esc(area ? area.name : 'this area')}">${siblings.map((s) => `
+      <button class="slot-btn${s.status !== 'available' ? ' is-unavailable' : ''}" type="button" data-slot="${esc(s.id)}" aria-pressed="${s.id === pl.id}" aria-label="${esc(`${s.name}, ${formatPrice(s.price)}, ${statusOf(s).label}`)}">
+        <b>${esc(s.tag || s.name)}</b><span>${s.status === 'available' ? formatPrice(s.price) : statusOf(s).label}</span>
+      </button>`).join('')}</div>` : ''}
+    <p class="panel-desc">${esc(pl.description)}</p>
+    <h4>Benefits</h4>
+    <ul class="benefits">${pl.benefits.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+    ${unavailable ? `<p class="panel-unavailable">This slot is currently <strong>${statusOf(pl).label.toLowerCase()}</strong>. Contact us about other available slots or to join the waiting list.</p>` : ''}
+    <div class="panel-actions">${contactButtons(pl)}</div>
+    ${bundle}`;
+}
+
+function renderCaption(hover) {
+  const cap = $('#stage-caption');
+  if (hover?.area) {
+    const area = getArea(hover.area), slots = slotsIn(area.id);
+    cap.innerHTML = `<p class="cap-text"><strong>${esc(area.name)}</strong>${slots.length} slots · ${priceSummary(slots)} · tap to zoom in</p>`;
+    return;
+  }
+  const pl = getPlacement(hover?.id || state.selected);
+  if (!pl) {
+    const view = getView(state.view);
+    const n = PLACEMENTS.filter((p) => p.zones.some((z) => z.view === view.id)).length;
+    cap.innerHTML = `<p class="cap-text">${n ? 'Tap or click an outlined slot to see its price.' : 'Tap a sleeve to open its three logo slots.'}</p>
+      ${n ? '' : `<button class="btn btn--outline btn--sm" type="button" data-goto="back">Back pockets ${ICONS.arrow}</button>`}`;
+    return;
+  }
+  const quick = !hover?.id || hover.id === state.selected
+    ? `<a class="btn btn--wa btn--sm" href="${esc(waLink(enquiryMessage(pl)))}" target="_blank" rel="noopener noreferrer">${ICONS.chat}${pl.status === 'available' ? 'Enquire' : 'Ask'}</a>` : '';
+  cap.innerHTML = `<p class="cap-text"><strong>${esc(pl.name)}</strong><span class="cap-price">${formatPrice(pl.price)}</span> · ${statusOf(pl).label}</p>${quick}`;
+}
+
+function renderOpportunities() {
+  $('#opp-groups').innerHTML = AREAS.map((a) => {
+    const slots = slotsIn(a.id);
+    if (!slots.length) return '';
+    return `<section class="opp-group" aria-labelledby="area-${esc(a.id)}">
+      <div class="opp-group-head">
+        <div><h3 id="area-${esc(a.id)}">${esc(a.name)}</h3><p>${esc(a.summary)} ${slots.length} slots · ${priceSummary(slots)} · ${available(slots).length} available.</p></div>
+        <button class="btn btn--outline btn--sm" type="button" data-area-view="${esc(a.view)}">View on jersey ${ICONS.arrow}</button>
+      </div>
+      <div class="opp-grid">${slots.map((pl) => `
+        <button class="opp-card" type="button" data-id="${esc(pl.id)}" aria-pressed="false" aria-label="${esc(`${pl.name}, ${formatPrice(pl.price)}, ${statusOf(pl).label}. Show on jersey`)}">
+          <span class="opp-pos">${esc(pl.position || a.name)}</span>
+          <span class="opp-name">${esc(pl.tag ? `${a.name.replace(/s$/, '')} · ${pl.tag}` : pl.name)}</span>
+          <span class="opp-foot"><span class="opp-price">${formatPrice(pl.price)}</span>${statusBadge(pl)}</span>
+        </button>`).join('')}</div>
+    </section>`;
+  }).join('');
+}
+
+function syncSelection() {
+  const stage = $('#stage');
+  const sel = getPlacement(state.selected);
+  stage.classList.toggle('has-selection', !!sel);
+  stage.querySelectorAll('.zone').forEach((g) => {
+    if (g.dataset.area) {
+      g.classList.toggle('is-related', !!sel && sel.area === g.dataset.area);
+      return;
+    }
+    const on = g.dataset.id === state.selected;
+    g.classList.toggle('is-selected', on);
+    g.setAttribute('aria-pressed', on);
+  });
+  document.querySelectorAll('.opp-card').forEach((c) => {
+    const on = c.dataset.id === state.selected;
+    c.classList.toggle('is-selected', on);
+    c.setAttribute('aria-pressed', on);
+  });
+}
+
+/* =========================================================================
+   INTERACTION
+   ========================================================================= */
+function setView(id, { focusTab = false } = {}) {
+  if (!getView(id) || id === state.view) return;
+  state.view = id;
+  renderTabs();
+  renderStage();
+  renderCaption();
+  if (focusTab) $(`#tab-${id}`).focus();
+}
+
+function scrollToStage() {
+  $('.stage-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function selectPlacement(id, { scrollTo = null } = {}) {
+  const pl = getPlacement(id);
+  if (!pl) return;
+  state.selected = id;
+  if (!pl.zones.some((z) => z.view === state.view)) setView(primaryView(pl));
+  syncSelection();
+  renderPanel();
+  renderCaption();
+  if (scrollTo === 'explorer') scrollToStage();
+}
+
+function clearSelection() {
+  const prev = state.selected;
+  state.selected = null;
+  syncSelection();
+  renderPanel();
+  renderCaption();
+  const zone = prev && document.querySelector(`.zone[data-id="${prev}"]`);
+  if (zone) zone.focus({ preventScroll: true });
+}
+
+function activateZone(zone) {
+  if (zone.dataset.target) {
+    setView(zone.dataset.target);
+    const first = $('#stage .zone[data-id]');
+    if (first) first.focus({ preventScroll: true });
+  } else {
+    selectPlacement(zone.dataset.id);
+  }
+}
+
+function bindEvents() {
+  const stage = $('#stage');
+  stage.addEventListener('click', (e) => {
+    const zone = e.target.closest('.zone');
+    if (zone) activateZone(zone);
+  });
+  stage.addEventListener('keydown', (e) => {
+    const zone = e.target.closest('.zone');
+    if (zone && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); activateZone(zone); }
+  });
+  ['mouseover', 'focusin'].forEach((t) => stage.addEventListener(t, (e) => {
+    const zone = e.target.closest('.zone');
+    if (zone) renderCaption(zone.dataset.area ? { area: zone.dataset.area } : { id: zone.dataset.id });
+  }));
+  ['mouseleave', 'focusout'].forEach((t) => stage.addEventListener(t, () => renderCaption()));
+
+  const tabs = $('#view-tabs');
+  tabs.addEventListener('click', (e) => {
+    const tab = e.target.closest('.view-tab');
+    if (tab) setView(tab.dataset.view);
+  });
+  tabs.addEventListener('keydown', (e) => {
+    const i = VIEWS.findIndex((v) => v.id === state.view);
+    let n = null;
+    if (e.key === 'ArrowRight') n = (i + 1) % VIEWS.length;
+    if (e.key === 'ArrowLeft') n = (i - 1 + VIEWS.length) % VIEWS.length;
+    if (e.key === 'Home') n = 0;
+    if (e.key === 'End') n = VIEWS.length - 1;
+    if (n !== null) { e.preventDefault(); setView(VIEWS[n].id, { focusTab: true }); }
+  });
+
+  // Delegated buttons: close, slot switcher, area shortcuts, caption shortcut.
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('[data-action="close"]')) return clearSelection();
+    const slot = e.target.closest('[data-slot]');
+    if (slot) return selectPlacement(slot.dataset.slot);
+    const areaBtn = e.target.closest('[data-area-view]');
+    if (areaBtn) { setView(areaBtn.dataset.areaView); return scrollToStage(); }
+    const go = e.target.closest('[data-goto]');
+    if (go) return setView(go.dataset.goto);
+    const card = e.target.closest('.opp-card');
+    if (card) return selectPlacement(card.dataset.id, { scrollTo: 'explorer' });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && state.selected) clearSelection();
+  });
+
+  if (DEBUG) {
+    const out = $('#debug-readout');
+    out.hidden = false;
+    out.textContent = 'Debug: click anywhere on the artwork to read its % coordinates.';
+    stage.addEventListener('click', (e) => {
+      const svg = stage.querySelector('svg');
+      const pt = svg.createSVGPoint();
+      pt.x = e.clientX; pt.y = e.clientY;
+      const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+      const v = getView(state.view);
+      const msg = `view: ${v.id}   x: ${(p.x / v.width * 100).toFixed(2)}%   y: ${(p.y / v.height * 100).toFixed(2)}%`;
+      out.textContent = msg;
+      console.log(msg);
+    }, true);
+  }
+}
+
+/* ---------- start ---------- */
+renderStatic();
+renderTabs();
+renderOpportunities();
+renderStage();
+renderPanel();
+renderCaption();
+bindEvents();
+</script>
+</body>
+</html>
