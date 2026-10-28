@@ -257,7 +257,7 @@ p{margin:0}
       <div class="section-head">
         <p class="eyebrow">Interactive Jersey</p>
         <h2>Choose your logo slot</h2>
-        <p>Tap a sleeve to open its close-up and pick one of its three slots, or tap a slot on the rear pockets. Each slot shows its price and availability, and you can enquire straight from there.</p>
+        <p>Tap a logo slot on either sleeve or on the rear pockets. Each slot shows its price and availability, and you can enquire straight from there.</p>
         <p class="notice" id="design-notice" role="note" hidden></p>
       </div>
       <div class="explorer">
@@ -268,7 +268,7 @@ p{margin:0}
           <div class="stage-caption" id="stage-caption" aria-live="polite"></div>
           <div class="legend" aria-hidden="true">
             <span><i class="swatch"></i>Logo slot</span>
-            <span><i class="swatch swatch--link"></i>Tap to zoom</span>
+            <span id="legend-link"><i class="swatch swatch--link"></i>Tap to zoom</span>
             <span><i class="swatch swatch--reserved"></i>Reserved</span>
             <span><i class="swatch swatch--sponsored"></i>Sponsored</span>
           </div>
@@ -371,18 +371,18 @@ const CONFIG = {
    - Hotspot coordinates are percentages of the artwork, so after replacing
      an image, re-check positions with ?debug=1 (click a point to read its %).  */
 const VIEWS = [
-  { id: 'front',        label: 'Front',        image: '', width: 500, height: 600, note: 'Front view. Tap a sleeve to see its three logo slots.' },
-  { id: 'back',         label: 'Back',         image: '', width: 500, height: 600, note: 'Back view. Logo slots sit on the three rear pockets.' },
-  { id: 'right-sleeve', label: 'Right Sleeve', image: '', width: 500, height: 600, note: 'Rider\'s right sleeve, outer side. Slot 1 is nearest the shoulder.' },
-  { id: 'left-sleeve',  label: 'Left Sleeve',  image: '', width: 500, height: 600, note: 'Rider\'s left sleeve, outer side. Slot 1 is nearest the shoulder.' },
+  { id: 'front',        label: 'Front',        image: '', width: 500, height: 600, note: 'Front view. The rider\'s right sleeve is on your left.' },
+  { id: 'back',         label: 'Back',         image: '', width: 500, height: 600, note: 'Back view. Logo slots on both sleeves and the three rear pockets.' },
+  { id: 'right-sleeve', label: 'Right Sleeve', image: '', width: 500, height: 600, note: 'Rider\'s right sleeve, outer side.' },
+  { id: 'left-sleeve',  label: 'Left Sleeve',  image: '', width: 500, height: 600, note: 'Rider\'s left sleeve, outer side.' },
 ];
 
 /* 3) SPONSORSHIP AREAS ---------------------------------------------------
    Groups slots together (used for the pricing list and the "all slots" enquiry).
    `view` is the close-up view that shows the area's slots.                 */
 const AREAS = [
-  { id: 'right-sleeve', name: 'Right Sleeve', view: 'right-sleeve', summary: 'Three logo slots on the outer right sleeve, visible from the side, front and back.' },
-  { id: 'left-sleeve',  name: 'Left Sleeve',  view: 'left-sleeve',  summary: 'Three logo slots on the outer left sleeve, visible from the side, front and back.' },
+  { id: 'right-sleeve', name: 'Right Sleeve', view: 'right-sleeve', summary: 'One logo slot on the outer right sleeve, visible from the side, front and back.' },
+  { id: 'left-sleeve',  name: 'Left Sleeve',  view: 'left-sleeve',  summary: 'One logo slot on the outer left sleeve, visible from the side, front and back.' },
   { id: 'back-pockets', name: 'Back Pockets', view: 'back',         summary: 'Three logo slots across the rear pockets, at eye level for riders following behind.' },
 ];
 
@@ -398,55 +398,44 @@ const AREAS = [
        polygon: { view, type:'poly', points:[[x,y], [x,y], ...] }
      `tag` is the short text shown on the jersey before the price (e.g. 'SLOT 1').
    `enquiry` is the main contact action: 'whatsapp', 'phone' or 'email'.          */
-const SLEEVE_SLOT_Y = { 1: 34.17, 2: 48.33, 3: 62.5 };   // vertical position of sleeve slots 1–3 (%)
-const SLEEVE_BENEFITS = ['Visible from the side, front and back', 'Seen in side-on riding and group photos', 'Affordable entry-level placement'];
+const SLEEVE_BENEFITS = ['Visible from the side, front and back', 'Seen in side-on riding and group photos', 'Large logo area on the outer sleeve'];
 const POCKET_BENEFITS = ['At eye level for riders following in the group', 'Visible in every rear-facing ride photo', 'Sits below the main UCC back logo'];
 
 const PLACEMENTS = [
-  // ---- Right sleeve: 3 slots @ RM250 ----
-  { id: 'rs-1', area: 'right-sleeve', name: 'Right Sleeve — Slot 1', position: 'Upper · near shoulder', tag: 'SLOT 1', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Upper logo position on the outer right sleeve, just below the shoulder seam.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[1], w: 30, h: 9.5 }] },
-  { id: 'rs-2', area: 'right-sleeve', name: 'Right Sleeve — Slot 2', position: 'Middle', tag: 'SLOT 2', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Centre of the outer right sleeve, the most visible sleeve position in side-on riding photos.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[2], w: 30, h: 9.5 }] },
-  { id: 'rs-3', area: 'right-sleeve', name: 'Right Sleeve — Slot 3', position: 'Lower · near cuff', tag: 'SLOT 3', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Lower logo position near the sleeve hem, clearly visible while riding.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'right-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[3], w: 30, h: 9.5 }] },
+  // ---- Sleeves: 1 slot each @ RM350 ----
+  // On the FRONT view the rider's right sleeve is on the viewer's LEFT; on the BACK view it is on the viewer's RIGHT.
+  { id: 'right-sleeve', area: 'right-sleeve', name: 'Right Sleeve', position: 'Outer right sleeve', price: 350, status: 'available', enquiry: 'whatsapp',
+    description: 'Logo on the outer face of the rider\'s right sleeve, visible from the side, front and back.', benefits: SLEEVE_BENEFITS,
+    zones: [
+      { view: 'right-sleeve', type: 'rect', x: 30, y: 40, w: 40, h: 16 },
+      { view: 'front', type: 'poly', points: [[20.19, 23.13], [23.99, 30.79], [19.01, 33.54], [15.21, 25.88]] },
+      { view: 'back',  type: 'poly', points: [[79.81, 23.13], [76.01, 30.79], [80.99, 33.54], [84.79, 25.88]] },
+    ] },
+  { id: 'left-sleeve', area: 'left-sleeve', name: 'Left Sleeve', position: 'Outer left sleeve', price: 350, status: 'available', enquiry: 'whatsapp',
+    description: 'Logo on the outer face of the rider\'s left sleeve, visible from the side, front and back.', benefits: SLEEVE_BENEFITS,
+    zones: [
+      { view: 'left-sleeve', type: 'rect', x: 30, y: 40, w: 40, h: 16 },
+      { view: 'front', type: 'poly', points: [[79.81, 23.13], [76.01, 30.79], [80.99, 33.54], [84.79, 25.88]] },
+      { view: 'back',  type: 'poly', points: [[20.19, 23.13], [23.99, 30.79], [19.01, 33.54], [15.21, 25.88]] },
+    ] },
 
-  // ---- Left sleeve: 3 slots @ RM250 ----
-  { id: 'ls-1', area: 'left-sleeve', name: 'Left Sleeve — Slot 1', position: 'Upper · near shoulder', tag: 'SLOT 1', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Upper logo position on the outer left sleeve, just below the shoulder seam.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[1], w: 30, h: 9.5 }] },
-  { id: 'ls-2', area: 'left-sleeve', name: 'Left Sleeve — Slot 2', position: 'Middle', tag: 'SLOT 2', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Centre of the outer left sleeve, the most visible sleeve position in side-on riding photos.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[2], w: 30, h: 9.5 }] },
-  { id: 'ls-3', area: 'left-sleeve', name: 'Left Sleeve — Slot 3', position: 'Lower · near cuff', tag: 'SLOT 3', price: 250, status: 'available', enquiry: 'whatsapp',
-    description: 'Lower logo position near the sleeve hem, clearly visible while riding.', benefits: SLEEVE_BENEFITS,
-    zones: [{ view: 'left-sleeve', type: 'rect', x: 35, y: SLEEVE_SLOT_Y[3], w: 30, h: 9.5 }] },
-
-  // ---- Back pockets: left / centre / right @ RM350 ----
-  { id: 'pk-left', area: 'back-pockets', name: 'Back Pocket — Left', position: 'Left pocket', tag: 'LEFT', price: 350, status: 'available', enquiry: 'whatsapp',
+  // ---- Back pockets: left / centre / right @ RM300 ----
+  { id: 'pk-left', area: 'back-pockets', name: 'Back Pocket — Left', position: 'Left pocket', tag: 'LEFT', price: 300, status: 'available', enquiry: 'whatsapp',
     description: 'Logo on the left rear pocket (as seen from behind), at eye level for riders following in the group.', benefits: POCKET_BENEFITS,
     zones: [{ view: 'back', type: 'rect', x: 32.13, y: 74.67, w: 9.6, h: 7.33 }] },
-  { id: 'pk-centre', area: 'back-pockets', name: 'Back Pocket — Centre', position: 'Centre pocket', tag: 'CENTRE', price: 350, status: 'available', enquiry: 'whatsapp',
+  { id: 'pk-centre', area: 'back-pockets', name: 'Back Pocket — Centre', position: 'Centre pocket', tag: 'CENTRE', price: 300, status: 'available', enquiry: 'whatsapp',
     description: 'Logo on the centre rear pocket, above the reflective strip. The most central sponsor position on the back.', benefits: POCKET_BENEFITS,
     zones: [{ view: 'back', type: 'rect', x: 45.2, y: 74.67, w: 9.6, h: 7.33 }] },
-  { id: 'pk-right', area: 'back-pockets', name: 'Back Pocket — Right', position: 'Right pocket', tag: 'RIGHT', price: 350, status: 'available', enquiry: 'whatsapp',
+  { id: 'pk-right', area: 'back-pockets', name: 'Back Pocket — Right', position: 'Right pocket', tag: 'RIGHT', price: 300, status: 'available', enquiry: 'whatsapp',
     description: 'Logo on the right rear pocket (as seen from behind), at eye level for riders following in the group.', benefits: POCKET_BENEFITS,
     zones: [{ view: 'back', type: 'rect', x: 58.27, y: 74.67, w: 9.6, h: 7.33 }] },
 ];
 
-/* 5) ZOOM SHORTCUTS -----------------------------------------------------
-   Outlined areas on the Front/Back views that open a close-up view
-   (the sleeve slots are too small to tap comfortably on the full jersey).
-   On the front, the rider's RIGHT sleeve is on the viewer's LEFT.         */
-const VIEW_LINKS = [
-  { view: 'front', area: 'right-sleeve', type: 'poly', points: [[29.6, 13.67], [10, 25], [16, 38], [25.6, 34.67]] },
-  { view: 'front', area: 'left-sleeve',  type: 'poly', points: [[70.4, 13.67], [90, 25], [84, 38], [74.4, 34.67]] },
-  { view: 'back',  area: 'left-sleeve',  type: 'poly', points: [[29.6, 13.67], [10, 25], [16, 38], [25.6, 34.67]] },
-  { view: 'back',  area: 'right-sleeve', type: 'poly', points: [[70.4, 13.67], [90, 25], [84, 38], [74.4, 34.67]] },
-];
+/* 5) ZOOM SHORTCUTS (optional) ------------------------------------------
+   Outlined areas on one view that open another view instead of selecting a slot,
+   useful when slots are too small to tap on the full jersey. Example:
+   { view: 'front', area: 'right-sleeve', type: 'poly', points: [[x,y], ...] }  */
+const VIEW_LINKS = [];
 
 /* 6) "WHY SPONSOR US?" CONTENT ------------------------------------------
    Edit freely. Only add achievements, race results or audience figures
@@ -480,11 +469,13 @@ const getView = (id) => VIEWS.find((v) => v.id === id);
 const getPlacement = (id) => PLACEMENTS.find((p) => p.id === id);
 const getArea = (id) => AREAS.find((a) => a.id === id);
 const slotsIn = (areaId) => PLACEMENTS.filter((p) => p.area === areaId);
+const slotCount = (list) => `${list.length} slot${list.length === 1 ? '' : 's'}`;
 const primaryView = (pl) => getArea(pl.area)?.view || pl.zones[0].view;
 const available = (list = PLACEMENTS) => list.filter((p) => p.status === 'available');
 const priceSummary = (list) => {
   const ps = list.map((p) => p.price);
   const min = Math.min(...ps), max = Math.max(...ps);
+  if (list.length === 1) return formatPrice(min);
   return min === max ? `${formatPrice(min)} each` : `from ${formatPrice(min)}`;
 };
 
@@ -715,6 +706,7 @@ function renderStatic() {
   const avail = available().map((p) => p.price);
   const from = formatPrice(avail.length ? Math.min(...avail) : min);
   $('#opp-intro').textContent = `${PLACEMENTS.length} logo slots across the sleeves and rear pockets, starting from ${from}. Select any slot to see it on the jersey.`;
+  if (!VIEW_LINKS.length) $('#legend-link').style.display = 'none';
   $('#opp-note').textContent = [CONFIG.pricingFootnote, CONFIG.designDisclaimer].filter(Boolean).join(' ');
   if (CONFIG.designDisclaimer) {
     const notice = $('#design-notice');
@@ -826,7 +818,7 @@ function renderPanel() {
         </ol>
         <div class="area-list">${AREAS.map((a) => {
           const slots = slotsIn(a.id);
-          return `<button class="area-btn" type="button" data-area-view="${esc(a.view)}"><b>${esc(a.name)}</b><span>${slots.length} slots · ${priceSummary(slots)}</span></button>`;
+          return `<button class="area-btn" type="button" data-area-view="${esc(a.view)}"><b>${esc(a.name)}</b><span>${slotCount(slots)} · ${priceSummary(slots)}</span></button>`;
         }).join('')}</div>
         <div class="panel-actions">${contactButtons(null, { primaryLabel: 'General Sponsorship Enquiry' })}</div>
       </div>`;
@@ -870,7 +862,7 @@ function renderCaption(hover) {
   if (!pl) {
     const view = getView(state.view);
     const n = PLACEMENTS.filter((p) => p.zones.some((z) => z.view === view.id)).length;
-    cap.innerHTML = `<p class="cap-text">${n ? 'Tap or click an outlined slot to see its price.' : 'Tap a sleeve to open its three logo slots.'}</p>
+    cap.innerHTML = `<p class="cap-text">${n ? 'Tap or click an outlined slot to see its price.' : 'Choose a view to see its logo slots.'}</p>
       ${n ? '' : `<button class="btn btn--outline btn--sm" type="button" data-goto="back">Back pockets ${ICONS.arrow}</button>`}`;
     return;
   }
@@ -885,7 +877,7 @@ function renderOpportunities() {
     if (!slots.length) return '';
     return `<section class="opp-group" aria-labelledby="area-${esc(a.id)}">
       <div class="opp-group-head">
-        <div><h3 id="area-${esc(a.id)}">${esc(a.name)}</h3><p>${esc(a.summary)} ${slots.length} slots · ${priceSummary(slots)} · ${available(slots).length} available.</p></div>
+        <div><h3 id="area-${esc(a.id)}">${esc(a.name)}</h3><p>${esc(a.summary)} ${slotCount(slots)} · ${priceSummary(slots)} · ${available(slots).length} available.</p></div>
         <button class="btn btn--outline btn--sm" type="button" data-area-view="${esc(a.view)}">View on jersey ${ICONS.arrow}</button>
       </div>
       <div class="opp-grid">${slots.map((pl) => `
