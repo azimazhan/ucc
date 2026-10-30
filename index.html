@@ -210,7 +210,16 @@ p{margin:0}
 .notice{display:flex;gap:10px;align-items:flex-start;margin-top:18px;padding:12px 14px;border:1px solid #efd096;border-left:4px solid #c98a12;background:#fdf7ea;border-radius:3px;font-size:14px;color:#5c3b00}
 .notice svg{width:18px;height:18px;flex:none;margin-top:1px}
 .notice strong{font-weight:600}
+.notice--info{border-color:var(--lilac);border-left-color:var(--purple);background:var(--lilac-soft);color:var(--purple-ink)}
+.notice + .notice{margin-top:10px}
+.panel-note{display:flex;gap:8px;margin-top:16px;font-size:13px;color:var(--muted)}
+.panel-note svg{width:16px;height:16px;flex:none;margin-top:2px}
 .hero-disclaimer{margin-top:6px;text-align:center;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.6)}
+.concept-figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:clamp(8px,1.5vw,16px)}
+.concept-figure a{display:block;cursor:zoom-in}
+.concept-figure img{width:100%;height:auto;border-radius:2px}
+.concept-figure figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 16px;margin-top:12px;font-size:14px;color:var(--muted)}
+.concept-figure figcaption a{display:inline;cursor:pointer;color:var(--purple);font-weight:600}
 .debug-readout{margin-top:8px;padding:8px 12px;font:13px/1.4 ui-monospace,Menlo,monospace;background:#111;color:#9f9;border-radius:4px}
 
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -226,6 +235,7 @@ p{margin:0}
     </a>
     <nav class="topbar-nav" aria-label="Sections">
       <a class="link" href="#explorer">Jersey</a>
+      <a class="link" href="#concept">Concept</a>
       <a class="link" href="#opportunities">Pricing</a>
       <a class="btn btn--wa btn--sm" id="nav-wa" target="_blank" rel="noopener noreferrer"></a>
     </nav>
@@ -276,6 +286,26 @@ p{margin:0}
         </div>
         <aside class="panel" id="panel" aria-live="polite" tabindex="-1"></aside>
       </div>
+    </div>
+  </section>
+
+  <!-- JERSEY CONCEPT (reference image) -->
+  <section class="section" id="concept" hidden>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Jersey Concept</p>
+        <h2>Design reference</h2>
+        <p>The full UCC jersey concept board, showing the front, back, sleeve and rear pocket logo positions, collar detail and colour palette.</p>
+        <p class="notice" id="concept-notice" role="note" hidden></p>
+        <p class="notice notice--info" id="logo-notice" role="note" hidden></p>
+      </div>
+      <figure class="concept-figure">
+        <a id="concept-link" target="_blank" rel="noopener noreferrer">
+          <img id="concept-img" width="1536" height="1024" loading="lazy" decoding="async"
+               alt="UCC jersey concept board: purple and black brush-stroke jersey with UCC logo on the chest and back, UiTM Cycling Club text on the back, one logo on each sleeve, three logos on the rear pockets, collar and fabric details, and a purple, dark purple, black, grey and white colour palette.">
+        </a>
+        <figcaption><span>UiTM Cycling Club · Jersey concept</span><a id="concept-open" target="_blank" rel="noopener noreferrer">Open full size</a></figcaption>
+      </figure>
     </div>
   </section>
 
@@ -351,6 +381,13 @@ const CONFIG = {
     phoneDisplay: '017-922 0286',
     email: '',                               // e.g. 'sponsorship@example.com'
   },
+
+  // Jersey concept board shown as a reference image. Put the file next to index.html
+  // (same GitHub repository) or use a full HTTPS URL. '' hides the section.
+  conceptImage: 'assets/ucc-jersey-concept.webp?v=2',   // bump ?v= after replacing the file so browsers load the new one
+
+  // Artwork note shown in the concept section, each slot's panel and the pricing notes. '' to hide.
+  logoColourNote: 'To keep the kit consistent with the UCC design theme, all sponsor logos will be reproduced in a single-colour white finish on the jersey.',
 
   // Shown above the jersey, under the hero jersey and in the pricing notes. '' to hide.
   designDisclaimer: 'The jersey design shown is a concept and is not final. Colours, artwork, logo slot positions and sizes may change in the final production design.',
@@ -450,7 +487,7 @@ const WHY_SPONSOR = [
 const HOW_IT_WORKS = [
   { title: 'Choose a slot', text: 'Pick one or more logo slots on the sleeves or rear pockets.' },
   { title: 'Contact us', text: 'Message or call us to confirm availability and terms.' },
-  { title: 'Send your logo', text: 'Provide your logo artwork for placement on the design.' },
+  { title: 'Send your logo', text: 'Provide your logo artwork. It will be reproduced in white to match the jersey design.' },
   { title: 'Ride together', text: 'Your brand goes into production on the team jersey.' },
 ];
 
@@ -707,8 +744,24 @@ function renderStatic() {
   const from = formatPrice(avail.length ? Math.min(...avail) : min);
   $('#opp-intro').textContent = `${PLACEMENTS.length} logo slots across the sleeves and rear pockets, starting from ${from}. Select any slot to see it on the jersey.`;
   if (!VIEW_LINKS.length) $('#legend-link').style.display = 'none';
-  $('#opp-note').textContent = [CONFIG.pricingFootnote, CONFIG.designDisclaimer].filter(Boolean).join(' ');
+  $('#opp-note').textContent = [CONFIG.pricingFootnote, CONFIG.logoColourNote, CONFIG.designDisclaimer].filter(Boolean).join(' ');
+  if (CONFIG.logoColourNote) {
+    const ln = $('#logo-notice');
+    ln.innerHTML = `${ICONS.info}<span><strong>Sponsor logo colour.</strong> ${esc(CONFIG.logoColourNote)}</span>`;
+    ln.hidden = false;
+  }
+  if (CONFIG.conceptImage) {
+    $('#concept-img').src = CONFIG.conceptImage;
+    $('#concept-link').href = CONFIG.conceptImage;
+    $('#concept-open').href = CONFIG.conceptImage;
+    $('#concept').hidden = false;
+  } else {
+    document.querySelector('.topbar-nav a[href="#concept"]').remove();
+  }
   if (CONFIG.designDisclaimer) {
+    const cn = $('#concept-notice');
+    cn.innerHTML = `${ICONS.info}<span><strong>Design not final.</strong> ${esc(CONFIG.designDisclaimer)}</span>`;
+    cn.hidden = false;
     const notice = $('#design-notice');
     notice.innerHTML = `${ICONS.info}<span><strong>Design not final.</strong> ${esc(CONFIG.designDisclaimer)}</span>`;
     notice.hidden = false;
@@ -846,6 +899,7 @@ function renderPanel() {
     <p class="panel-desc">${esc(pl.description)}</p>
     <h4>Benefits</h4>
     <ul class="benefits">${pl.benefits.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>
+    ${CONFIG.logoColourNote ? `<p class="panel-note">${ICONS.info}<span>${esc(CONFIG.logoColourNote)}</span></p>` : ''}
     ${unavailable ? `<p class="panel-unavailable">This slot is currently <strong>${statusOf(pl).label.toLowerCase()}</strong>. Contact us about other available slots or to join the waiting list.</p>` : ''}
     <div class="panel-actions">${contactButtons(pl)}</div>
     ${bundle}`;
